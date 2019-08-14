@@ -40,7 +40,7 @@ partition(){
     echo p      # Primary partition
     echo 4      # Partition number
     echo        # First sector
-    echo        # Last sector (To the end)
+    echo 
 
     #Write Changes
     echo w 
@@ -64,12 +64,13 @@ mountpartitions(){
 }
 
 installarch(){
-    pacstrap /mnt base base-devel vim networkmanager
+    pacstrap /mnt base 
 }
 
 postinstallation(){
     generatefstab
     arch-chroot /mnt                    # Switches to newly created arch as root
+    sudo pacman -S base-devel vim networkmanager
     systemctl enable NetworkManager     # NetworkManager enabled at startup
     installgrub $1
     generatelocale
@@ -101,15 +102,12 @@ settimezone(){
 }
 
 sethostname(){
-    echo "gib hostname"
-    read $hostname
+    read -p "gib hostname" hostname
     echo $hostname > /etc/hostname
 }
 
-
 lsblk
-echo Which drive to format
-read $driveLetter
+read -p "Which drive to format : " driveLetter
 partition $driveLetter
 makefilesystems $driveLetter
 mountpartitions
