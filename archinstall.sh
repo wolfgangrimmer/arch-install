@@ -1,12 +1,4 @@
 #!/bin/sh
-lsblk
-echo Which drive to format
-read $driveLetter
-partition $driveLetter
-makefilesystems $driveLetter
-mountpartitions
-installarch
-postinstallation $driveletter
 
 partition(){
     lsblk
@@ -115,3 +107,13 @@ sethostname(){
     read $hostname
     echo $hostname > /etc/hostname
 }
+
+
+lsblk
+echo Which drive to format
+read $driveLetter
+partition $driveLetter
+makefilesystems $driveLetter
+mountpartitions
+installarch
+postinstallation $driveletter
