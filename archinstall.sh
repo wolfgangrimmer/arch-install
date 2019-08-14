@@ -44,7 +44,7 @@ partition(){
 
     #Write Changes
     echo w 
-    ) | sudo fdisk /dev/sd$driveletter
+    ) | sudo fdisk /dev/sd$1
 }
 
 makefilesystems(){
