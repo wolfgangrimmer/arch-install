@@ -56,7 +56,7 @@ makefilesystems(){
 }
 
 mountpartitions(){
-    mkdir /mnt/home
+    mkdir /mnt/home #possible problem with line endings here, rewrite those two mkdir lines in vim if necessary
     mkdir /mnt/boot
     mount /dev/sd$13 /mnt/
     mount /dev/sd$11 /mnt/boot
@@ -64,52 +64,15 @@ mountpartitions(){
 }
 
 installarch(){
-    pacstrap /mnt base 
-}
-
-postinstallation(){
-    generatefstab
-    arch-chroot /mnt                    # Switches to newly created arch as root
-    sudo pacman -S base-devel vim networkmanager
-    systemctl enable NetworkManager     # NetworkManager enabled at startup
-    installgrub $1
-    generatelocale
-    settimezone
-    sethostname
-    echo "Set root password"
-    passwd
-}
-
-generatefstab(){
-    genfstab -U /mnt                    # Displays fstab to user
-    genfstab -U /mnt >> /mnt/etc/fstab  # -U is for UUIDS
-}
-
-installgrub(){
-    pacman -S grub
-    grub-install --target=i386-pc /dev/sd$1
-    grub-mkconfig -o /boot/grub/grub.cfg
-}
-
-generatelocale(){
-    sed -i -e 's/#en_US/en_US/g' /etc/locale.gen
-    locale-gen
-    echo "LANG=en-US.UTF-8" > /etc/locale.conf
-}
-
-settimezone(){
-    ls -sf /usr/share/zoneinfo/Poland /etc/localtime
-}
-
-sethostname(){
-    read -p "gib hostname" hostname
-    echo $hostname > /etc/hostname
+    curl -L http:// > /mnt/postinstall.sh
+    pacstrap /mnt base
+    echo "Now run postinstall.sh by typing : sh postinstall.sh"
+    arch-chroot /mnt    # Switches to newly created arch as root
 }
 
 lsblk
 read -p "Which drive to format : " driveLetter
 partition $driveLetter
 makefilesystems $driveLetter
-mountpartitions
+mountpartitions $driveLetter
 installarch
-postinstallation $driveletter
