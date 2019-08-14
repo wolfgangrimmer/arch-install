@@ -64,7 +64,6 @@ mountpartitions(){
 }
 
 installarch(){
-    curl -L http:// > /mnt/postinstall.sh
     pacstrap /mnt base
     echo "Now run postinstall.sh by typing : sh postinstall.sh"
     arch-chroot /mnt    # Switches to newly created arch as root
@@ -75,4 +74,5 @@ read -p "Which drive to format : " driveLetter
 partition $driveLetter
 makefilesystems $driveLetter
 mountpartitions $driveLetter
+curl -L https://raw.githubusercontent.com/wolfgangrimmer/arch-install/master/postinstall.sh > /mnt/postinstall.sh
 installarch
