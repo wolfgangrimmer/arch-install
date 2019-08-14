@@ -1,10 +1,8 @@
 #!/bin/sh
 
 partition(){
-    lsblk
-    echo Which drive to format
-    read $driveLetter
-    (echo o # Create a new empty DOS partition table
+    (
+    #echo o # Create a new empty DOS partition table
 
     ##wipe drive
     echo d      # Delete partition
