@@ -70,9 +70,11 @@ installarch(){
 }
 
 lsblk
+
 read -p "Which drive to format : " driveLetter
 partition $driveLetter
 makefilesystems $driveLetter
 mountpartitions $driveLetter
 curl -L https://raw.githubusercontent.com/wolfgangrimmer/arch-install/master/postinstall.sh > /mnt/postinstall.sh
+curl -L https://raw.githubusercontent.com/wolfgangrimmer/arch-install/master/setup.sh > /mnt/setup.sh
 installarch

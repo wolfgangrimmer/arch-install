@@ -2,7 +2,7 @@
 
 postinstallation(){
     generatefstab
-    sudo pacman -S base-devel vim networkmanager
+    pacman -S base-devel vim networkmanager
     systemctl enable NetworkManager     # NetworkManager enabled at startup
     installgrub $1
     generatelocale
@@ -41,3 +41,4 @@ sethostname(){
 lsblk
 read -p "Drive letter : " driveLetter
 postinstallation $driveLetter
+echo "Run setup.sh after reboot and login"
