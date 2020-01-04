@@ -1,5 +1,8 @@
 #!/bin/sh
 
+#genfstab should be here before chroot
+#grub shouldnt be installed on partition but on drive (/dev/sda instead of dev/sda1)
+
 partition(){
     (
     #echo o # Create a new empty DOS partition table
