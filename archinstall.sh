@@ -1,8 +1,5 @@
 #!/bin/sh
 
-#genfstab should be here before chroot
-#grub shouldnt be installed on partition but on drive (/dev/sda instead of dev/sda1)
-
 partition(){
     (
     #echo o # Create a new empty DOS partition table
@@ -66,6 +63,11 @@ mountpartitions(){
     mount /dev/sd$14 /mnt/home
 }
 
+generatefstab(){
+    genfstab -U /               # Displays fstab to user
+    genfstab -U / >> /etc/fstab # -U is for UUIDS
+}
+
 installarch(){
     pacstrap /mnt base
     echo "Now run postinstall.sh by typing : sh postinstall.sh"
@@ -79,4 +81,5 @@ makefilesystems $driveLetter
 mountpartitions $driveLetter
 curl -L https://raw.githubusercontent.com/wolfgangrimmer/arch-install/master/postinstall.sh > /mnt/postinstall.sh
 curl -L https://raw.githubusercontent.com/wolfgangrimmer/arch-install/master/larbs.sh > /mnt/larbs.sh
+generatefstab
 installarch
