@@ -1,8 +1,6 @@
 #!/bin/sh
 
 postinstallation(){
-    generatefstab
-    pacman -S base-devel sudo vim networkmanager
     systemctl enable NetworkManager     # NetworkManager enabled at startup
     installgrub $1
     generatelocale
@@ -12,14 +10,9 @@ postinstallation(){
     passwd
 }
 
-generatefstab(){
-    genfstab -U /               # Displays fstab to user
-    genfstab -U / >> /etc/fstab # -U is for UUIDS
-}
-
 installgrub(){
     pacman -S grub
-    grub-install --target=i386-pc /dev/sd$1
+    grub-install --target=i386-pc /dev/sd$
     grub-mkconfig -o /boot/grub/grub.cfg
 }
 
@@ -41,4 +34,4 @@ sethostname(){
 lsblk
 read -p "Drive letter : " driveLetter
 postinstallation $driveLetter
-echo "Run larbs.sh after reboot and login"
+echo "Run larbs.sh after reboot"
