@@ -74,6 +74,7 @@ installarch(){
     arch-chroot /mnt    # Switches to newly created arch as root
 }
 
+pacman -S archlinux-keyring && sudo pacman -Syu
 lsblk
 read -p "Which drive to format : " driveLetter
 partition $driveLetter
