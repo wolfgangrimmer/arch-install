@@ -69,7 +69,7 @@ generatefstab(){
 }
 
 installarch(){
-    pacstrap /mnt base
+    pacstrap /mnt base base-devel sudo vim networkmanager
     echo "Now run postinstall.sh by typing : sh postinstall.sh"
     arch-chroot /mnt    # Switches to newly created arch as root
 }
