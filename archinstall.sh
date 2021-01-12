@@ -2,7 +2,7 @@
 
 partition(){
     (
-    #echo o # Create a new empty DOS partition table
+    echo g # Create a new empty DOS partition table
 
     ##wipe drive
     echo d      # Delete partition
@@ -26,7 +26,7 @@ partition(){
     echo p      # Primary partition
     echo 2      # Partition number
     echo        # First sector
-    echo +8G    # Last sector (Accept default: varies)
+    echo +12G    # Last sector (Accept default: varies)
 
     ##root
     echo n      # Add a new partition
@@ -69,7 +69,7 @@ generatefstab(){
 }
 
 installarch(){
-    pacstrap /mnt base base-devel sudo vim networkmanager
+    pacstrap /mnt base linux linux-firmware base-devel sudo vim networkmanager
     echo "Now run postinstall.sh by typing : sh postinstall.sh"
     arch-chroot /mnt    # Switches to newly created arch as root
 }
