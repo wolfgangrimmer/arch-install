@@ -48,7 +48,7 @@ partition(){
 }
 
 makefilesystems(){
-    mkfs.vfat /dev/sd$11
+    mkfs.fat -F32 /dev/sd$11
     mkfs.ext4 /dev/sd$13
     mkfs.ext4 /dev/sd$14
     mkswap /dev/sd$12
