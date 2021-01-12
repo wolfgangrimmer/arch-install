@@ -23,7 +23,7 @@ generatelocale(){
 }
 
 settimezone(){
-    ls -sf /usr/share/zoneinfo/Poland /etc/localtime
+    ln -sf /usr/share/zoneinfo/Poland /etc/localtime
 }
 
 sethostname(){
