@@ -2,7 +2,7 @@
 
 partition(){
     (
-    echo g # Create a new empty DOS partition table
+    echo g # Create a new empty GPT partition table
 
     ##wipe drive
     echo d      # Delete partition
